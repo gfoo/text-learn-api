@@ -1,6 +1,6 @@
 package org.gfoo.textlearnapi;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +23,9 @@ public class CustomGlobalExceptionHandler
 	    HttpStatus status, WebRequest request) {
 		List<String> errors = ex.getBindingResult().getFieldErrors().stream()
 		    .map(x -> x.getDefaultMessage()).collect(Collectors.toList());
-		return new ResponseEntity<>(new ApiError(errors, new Date(), status),
-		    headers, status);
+		return new ResponseEntity<>(
+		    new ApiError(errors, Instant.now(), HttpStatus.BAD_REQUEST), headers,
+		    HttpStatus.BAD_REQUEST);
 	}
 
 }

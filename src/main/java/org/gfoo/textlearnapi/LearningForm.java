@@ -1,6 +1,6 @@
-package org.gfoo.textlearnapi.model;
+package org.gfoo.textlearnapi;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -34,6 +34,6 @@ public class LearningForm {
 	 * Learning call date
 	 */
 	@Setter
-	private Date date;
+	private Instant timestamp;
 
 }

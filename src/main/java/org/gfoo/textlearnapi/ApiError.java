@@ -1,6 +1,6 @@
 package org.gfoo.textlearnapi;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,6 @@ import lombok.ToString;
 @ToString
 public class ApiError {
 	private List<String> errors;
-	private Date timestamp;
+	private Instant timestamp;
 	private HttpStatus status;
 }
