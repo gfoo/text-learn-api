@@ -1,3 +1,7 @@
+notifications:
+  slack:
+    on_success: never
+
 language: java
 
 jdk:
