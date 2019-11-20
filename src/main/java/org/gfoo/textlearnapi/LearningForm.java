@@ -15,19 +15,19 @@ public class LearningForm {
 	/**
 	 * Text content to learn
 	 */
-	@NotEmpty(message = "Please provide a text")
+	@NotEmpty(message = "Please provide a 'text'")
 	private String text;
 
 	/**
 	 * Topic name of the learning
 	 */
-	@NotEmpty(message = "Please provide a topic")
+	@NotEmpty(message = "Please provide a 'topic'")
 	private String topic;
 
 	/**
 	 * Method name of the learning
 	 */
-	@NotEmpty(message = "Please provide a method")
+	@NotEmpty(message = "Please provide a 'method'")
 	private String method;
 
 	/**
