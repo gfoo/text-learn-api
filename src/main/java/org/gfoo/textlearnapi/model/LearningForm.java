@@ -1,4 +1,4 @@
-package org.gfoo.textlearnapi;
+package org.gfoo.textlearnapi.model;
 
 import java.time.Instant;
 

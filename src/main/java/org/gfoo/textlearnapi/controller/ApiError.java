@@ -1,4 +1,4 @@
-package org.gfoo.textlearnapi;
+package org.gfoo.textlearnapi.controller;
 
 import java.time.Instant;
 import java.util.List;

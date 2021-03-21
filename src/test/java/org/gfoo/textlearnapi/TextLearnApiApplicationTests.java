@@ -2,19 +2,26 @@ package org.gfoo.textlearnapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.HashSet;
 
+import org.gfoo.textlearnapi.controller.ApiError;
+import org.gfoo.textlearnapi.model.LearningForm;
+import org.gfoo.textlearnapi.service.LearnMessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -65,18 +72,18 @@ public class TextLearnApiApplicationTests {
 		String contentAsString = result.getResponse().getContentAsString();
 
 		ApiError response = objectMapper.readValue(contentAsString, ApiError.class);
-//		assertEquals(response.getStatus(), HttpStatus.BAD_REQUEST);
-//		assertEquals(response.getErrors().size(), 2);
-//		assertEquals(new HashSet<String>(response.getErrors()),
-//		    new HashSet<>(Arrays.asList(new String[] { "Please provide a 'text'",
-//		        "Please provide a 'method'" })));
+		assertEquals(response.getStatus(), HttpStatus.BAD_REQUEST);
+		assertEquals(response.getErrors().size(), 2);
+		assertEquals(new HashSet<String>(response.getErrors()),
+		    new HashSet<>(Arrays.asList(new String[] { "Please provide a 'text'",
+		        "Please provide a 'method'" })));
 		assertThat(response.getTimestamp().compareTo(date) > 0);
 		assertThat(response.getTimestamp().compareTo(Instant.now()) < 0);
 	}
 
 	@Test
 	public void completeLearn() throws Exception {
-
+		when(learnMessageSrv.isAvailable()).thenReturn(true);
 		Instant date = Instant.now();
 		ResultActions resultActions = this.mvc
 		    .perform(post("/learn").contentType(MediaType.APPLICATION_JSON).content(
